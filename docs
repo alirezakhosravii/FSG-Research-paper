@@ -1,0 +1,47 @@
+Fluorescence-Guided Surgery for Gliomas: A Novel Real-time Intraoperative Video Analysis Approach for Accurate Tumor Margin Delineation
+Documentation
+
+Author: Alireza Khosravi- Medical University of Gdansk
+
+Overview
+The tool provides a comprehensive video analysis platform that processes video frames to compute various image metrics. It uses a combination of intensity-based thresholding, Gaussian modeling, texture filtering, and color transformations to analyze video content. The primary focus appears to be tumor probability detection based on various visual criteria.
+Dependencies
+- numpy
+- OpenCV (cv2)
+- tkinter
+- PIL (Image, ImageTk)
+- matplotlib
+- scipy
+- skimage
+Gaussian Modeling Functions
+- `gaussian(x, A, x0, sigma)`: Defines a Gaussian function.
+- `fit_gaussian(frame)`: Fits a Gaussian model to the average pixel intensity across rows.
+Intensity Gradient Functions
+- `compute_gradient(frame)`: Computes the gradient and magnitude of a frame.
+Thresholding and Overlay Functions
+- `adaptive_thresholding(frame, popt)`: Performs adaptive thresholding using percentiles of the Gaussian values.
+- `overlay_on_video(frame, high_prob, medium_prob, low_prob)`: Overlays color-coded regions based on probability thresholds.
+Resection Zone Functions
+- `resection_zone(high_prob, medium_prob)`: Determines the resection boundary based on high and medium probability regions.
+- `visualize_resection_zone(overlay_frame, resection_boundary)`: Visualizes the resection boundary on the overlay frame.
+Post-processing Functions
+- `smooth_segmentation(segmentation)`: Smoothens the segmentation using a Gaussian filter.
+Texture and Color Transformations
+- `compute_lbp(frame, radius=1, n_points=8)`: Computes the Local Binary Pattern (LBP) of a frame for texture analysis.
+- `texture_filtering(lbp_image, threshold=0.5)`: Filters out regions based on texture patterns from the LBP image.
+- `transform_color_space(frame, space="HSV")`: Transforms the frame into a specified color space.
+Other Functionalities
+- `temporal_average(frame, prev_frames, N)`: Computes the temporal average over the last `N` frames.
+- `robust_color_segmentation(image)`: Provides color-based segmentation.
+- `texture_analysis_using_variance(image, kernel_size=5, threshold=10)`: Performs texture analysis based on local variance.
+- `tumor_segmentation(image)`: Segments potential tumor regions in the image.
+VideoPlayer Class
+This is the main class that provides the GUI and video playback functionalities.
+
+- `__init__(self, window, window_title, video_path=None)`: Initializes the GUI components and loads a video if a path is provided.
+- `on_closing(self)`: Releases video resources and closes the window.
+- `open_video(self)`: Opens a video using a file dialog.
+- `resize_frame_to_fit(self, frame, desired_width, desired_height)`: Resizes a frame to fit within the specified dimensions.
+- `play_video(self)`: Initiates video playback.
+- `process_frame(self, frame)`: Processes a video frame and applies various transformations and analyses.
+- `update(self)`: Continuously updates the video frames and displays during playback.
